@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jsonproducer
+  namespace: default
+  labels:
+    app: jsonproducer
+spec:
+  revisionHistoryLimit: 2
+  strategy:
+    type: RollingUpdate
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: jsonproducer
+    spec:
+      containers:
+      - image: ualmtorres/jsonproducer:v0
+        name: jsonproducer
+        ports:
+        - name: http
+          containerPort: 80
